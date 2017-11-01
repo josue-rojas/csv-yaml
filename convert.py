@@ -6,6 +6,8 @@ import urllib2 # i used for sheets online csv
 
 root = os.getcwd()
 
+ https://docs.google.com/spreadsheets/d/11vOfFXB8uQ0te-5yZ16CWFUQM6ZoJzpouhTBHUhFyAw/export?format=csv&id=11vOfFXB8uQ0te-5yZ16CWFUQM6ZoJzpouhTBHUhFyAw&gid=0
+
 #
 # takes a csvFile name and output file name/path
 def csvToYaml(csvFile, output):
@@ -29,4 +31,4 @@ def localCSV():
                 csvToYaml(csvfile, output)
 
 
-urlCSV('http://winterolympicsmedals.com/medals.csv')
+urlCSV('https://docs.google.com/spreadsheets/d/11vOfFXB8uQ0te-5yZ16CWFUQM6ZoJzpouhTBHUhFyAw/export?format=csv&id=11vOfFXB8uQ0te-5yZ16CWFUQM6ZoJzpouhTBHUhFyAw&gid=0')
