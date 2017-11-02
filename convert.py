@@ -1,22 +1,13 @@
 import yaml
 import os
 import csv
-<<<<<<< HEAD
 import urllib2 # i used for online csv
-=======
 import getopt
 import sys
-import urllib2 # i used for sheets online csv
->>>>>>> closes #1, closes #2, closes #3, closes #4, needs testing and more print -h
 # https://stackoverflow.com/questions/16283799/how-to-read-a-csv-file-from-a-url-with-python
 
 root = os.getcwd()
 
-<<<<<<< HEAD
-#
-=======
-
->>>>>>> closes #1, closes #2, closes #3, closes #4, needs testing and more print -h
 # takes a csvFile name and output file name/path
 def csvToYaml(csvFile, output):
     stream = file(output, 'w')
@@ -37,8 +28,6 @@ def localCSV():
             with open(csvFile, 'rb') as csvfile:
                 output = f.replace('.csv','.yml')
                 csvToYaml(csvfile, output)
-<<<<<<< HEAD
-=======
 
 def usage():
     # write instructions....
@@ -78,4 +67,3 @@ def main():
 
 if __name__ == "__main__":
     main()
->>>>>>> closes #1, closes #2, closes #3, closes #4, needs testing and more print -h
