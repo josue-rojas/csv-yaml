@@ -24,10 +24,12 @@ def urlCSV(url, output=None):
 
 # converts all csv file in this folder
 def localCSV(folder=root):
+    # print folder
     for f in os.listdir(folder):
         if f.endswith('.csv'):
-            csvFile = os.path.join(root, f)
-            output = f.replace('.csv','.yml')
+            csvFile = os.path.join(folder, f)
+            output = os.path.join(folder, f.replace('.csv','.yml'))
+            print output
             singleCSV(csvFile, output)
 
 # converts only one csv file
@@ -38,11 +40,11 @@ def singleCSV(csvFile, output=None):
 
 # print -h --help
 def usage():
-    print '\nUsage:\n-i --input: path/link of file (if link use url flag)\n-o --output: path name of output, if left out will convert in this folder using its name as output\n-u --url: url flag indicating input is a url and should be treated as such\n-h --help: print this/help stuff.....'
+    print '\nUsage:\n-i --input: path/link of file (if link use url flag)\n-o --output: path name of output, if left out will convert in this folder using its name as output\n-u --url: url flag indicating input is a url and should be treated as such\n-f --folder: flag indicating input is directory/folder and should be treate as such\n-h --help: print this/help stuff.....'
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'hi:o:u', ['help', 'input=','output=', 'url'])
+        opts, args = getopt.getopt(sys.argv[1:], 'hi:o:uf', ['help', 'input=','output=', 'url', 'folder'])
     except getopt.GetoptError as err:
         print str(err)
         usage()
@@ -50,6 +52,7 @@ def main():
     csvFile = None
     output = None
     url = False
+    folder = False
     if len(opts) == 0:
         localCSV()
         exit()
@@ -63,10 +66,15 @@ def main():
             output = a
         elif o in ('-u', '--url'):
             url = True
+        elif o in ('-f', '--folder'):
+            folder = True
         else:
             print 'unhandled option'
     if url:
         urlCSV(csvFile, output)
+        exit()
+    elif folder:
+        localCSV(csvFile)
         exit()
     singleCSV(csvFile, output)
 
