@@ -78,6 +78,5 @@ def main():
         exit()
     singleCSV(csvFile, output)
 
-
-if __name__ == "__main__":
+if __name__ in ("__main__", "csvyml"):
     main()
