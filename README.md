@@ -3,9 +3,11 @@ a script to convert csv to yaml files using PyYaml for use in Jekyll templating 
 
 ### Need
 - [PyYaml](http://pyyaml.org/wiki/PyYAMLDocumentation)
-- I am using python 2.7.....
-- I am also using mac............
+- I am also using mac. (if that makes a difference (I never tested on windows))
 
+#### Usage
+
+Note: Use convert.py for python 2.7 and convert3.py for python 3.
 ```bash
 Usage:
 # -i --input: path/link of file (if link use url flag)
@@ -18,12 +20,12 @@ Usage:
 #Assuming using this in your working directory
 
 # simple local file input output
-python convert.py -i some/file/csvFile.csv -o some/file/converted.yml 
+python convert.py -i some/file/csvFile.csv -o some/file/converted.yml
 # using url
-python convert.py -i 'http://winterolympicsmedals.com/medals.csv' -o some/file/path/converted.yml -url 
+python convert3.py -i 'http://winterolympicsmedals.com/medals.csv' -o some/file/path/converted.yml -u
 # all from folder
 python convert.py -i some/file/path/ -f
 # all from this folder
-python convert.py 
+python convert.py
 
 ```
