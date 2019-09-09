@@ -5,10 +5,27 @@ import codecs
 from urllib.request import urlopen
 import getopt
 import sys
+from collections import OrderedDict
 # https://stackoverflow.com/questions/16283799/how-to-read-a-csv-file-from-a-url-with-python
 
 root = os.getcwd()
 
+# Generates a Yaml dump that keeps the order of columns
+def ordered_dump(data, stream=None, Dumper=yaml.Dumper, **kwds):
+    # see here:
+    # http://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts
+
+    class OrderedDumper(Dumper):
+        pass
+
+    def _dict_representer(dumper, data):
+        return dumper.represent_mapping(
+            yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+            list(data.items()))
+
+    OrderedDumper.add_representer(OrderedDict, _dict_representer)
+    return yaml.dump(data, stream, OrderedDumper, **kwds)
+    
 # takes a csvFile name and output file name/path
 def csvToYaml(csvFile, output):
     stream = open(output, 'w',encoding="utf-8")
@@ -17,7 +34,7 @@ def csvToYaml(csvFile, output):
     csvOpen = csv.reader(codecs.iterdecode(csvFile, 'utf-8'))
     keys = next(csvOpen)
     for row in csvOpen:
-        yaml.dump([dict(zip(keys, row))], stream, default_flow_style=False)
+        ordered_dump([OrderedDict(zip(keys, row))], stream, default_flow_style=False)
 
 # converts single url file
 def urlCSV(url, output=None):
