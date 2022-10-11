@@ -17,7 +17,7 @@ def csvToYaml(csvFile, output):
     csvOpen = csv.reader(codecs.iterdecode(csvFile, 'utf-8'))
     keys = next(csvOpen)
     for row in csvOpen:
-        yaml.dump([dict(zip(keys, row))], stream, default_flow_style=False)
+        yaml.dump([dict(zip(keys, row))], stream, default_flow_style=False, allow_unicode=True)
 
 # converts single url file
 def urlCSV(url, output=None):
